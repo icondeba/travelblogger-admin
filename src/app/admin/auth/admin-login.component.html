@@ -1,0 +1,30 @@
+<div class="login-page">
+  <div class="login-card">
+    <h1>Admin Login</h1>
+    <p class="subtitle">Sign in to manage your content.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <label class="field">
+        <span>User ID</span>
+        <input type="text" formControlName="userId" placeholder="Enter your user id" />
+        <small *ngIf="form.controls.userId.touched && form.controls.userId.invalid">
+          User ID is required.
+        </small>
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <input type="password" formControlName="password" placeholder="********" />
+        <small *ngIf="form.controls.password.touched && form.controls.password.invalid">
+          Password must be at least 6 characters.
+        </small>
+      </label>
+
+      <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <button class="primary" type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Signing in...' : 'Login' }}
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+p {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0.75rem;
+  color: var(--primary);
+}
+
+.value.muted {
+  color: var(--text-muted);
+}
+
+.loading {
+  padding: 2rem;
+  color: var(--text-muted);
+}

@@ -1,0 +1,63 @@
+<div class="page-header">
+  <div>
+    <h2>{{ isEdit ? 'Edit Event' : 'New Event' }}</h2>
+    <p>Add upcoming event details.</p>
+  </div>
+</div>
+
+<div *ngIf="!isLoading; else loading">
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-card">
+    <label class="field">
+      <span>Title</span>
+      <input type="text" formControlName="title" placeholder="Event title" />
+      <small *ngIf="form.controls.title.touched && form.controls.title.invalid">Title is required.</small>
+    </label>
+
+    <label class="field">
+      <span>Location</span>
+      <input type="text" formControlName="location" placeholder="City, Country" />
+      <small *ngIf="form.controls.location.touched && form.controls.location.invalid">
+        Location is required.
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Date</span>
+      <input type="date" formControlName="eventDate" />
+      <small *ngIf="form.controls.eventDate.touched && form.controls.eventDate.invalid">
+        Date is required.
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Details</span>
+      <textarea rows="6" formControlName="details" placeholder="Describe the event..."></textarea>
+      <small *ngIf="form.controls.details.touched && form.controls.details.invalid">
+        Details are required (min 10 characters).
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Cover Image</span>
+      <input type="file" accept="image/png,image/jpeg,image/webp" (change)="onFileSelected($event)" />
+      <small>Upload JPG, PNG, or WEBP (max 5MB). You can replace it later.</small>
+    </label>
+
+    <div class="preview" *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="Event cover preview" />
+    </div>
+
+    <div class="form-actions">
+      <button class="primary" type="submit" [disabled]="isSaving">
+        {{ isSaving ? 'Saving...' : isEdit ? 'Update Event' : 'Create Event' }}
+      </button>
+      <button *ngIf="isEdit" class="secondary" type="button" [disabled]="isSaving" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading event...</div>
+</ng-template>

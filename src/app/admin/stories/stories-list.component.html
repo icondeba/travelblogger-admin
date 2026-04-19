@@ -1,0 +1,73 @@
+<div class="page-header">
+  <div>
+    <h2>Stories</h2>
+    <p>Manage your admin adventures.</p>
+  </div>
+  <a class="primary" routerLink="/admin/stories/new">Add New Stories</a>
+</div>
+
+<div *ngIf="!isLoading; else loading">
+  <div class="table-card" *ngIf="stories.length; else empty">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Cover</th>
+          <th>Slug</th>
+          <th>Status</th>
+          <th>Publish Date</th>
+          <th class="actions-head">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let story of stories">
+          <td>{{ story.title }}</td>
+          <td>
+            <img *ngIf="story.image" class="thumb" [src]="story.image" [alt]="story.title" />
+            <span *ngIf="!story.image">-</span>
+          </td>
+          <td>{{ story.slug }}</td>
+          <td>{{ story.status }}</td>
+          <td>{{ story.publishDate | date: 'mediumDate' }}</td>
+          <td class="actions">
+            <a
+              class="action-btn action-edit"
+              [routerLink]="['/admin/stories/edit', story.id]"
+              title="Edit story"
+              aria-label="Edit story"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 17.25V21h3.75L19.81 7.94l-3.75-3.75L3 17.25Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M14.06 4.19 17.81 7.94" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </a>
+            <button
+              type="button"
+              class="action-btn action-delete"
+              title="Delete story"
+              aria-label="Delete story"
+              (click)="deleteStory(story)"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 7h16" stroke="currentColor" stroke-width="1.8" />
+                <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.8" />
+                <path d="M6 7l1 13h10l1-13" stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty-state">
+    No stories yet. Create your first story.
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading">Loading stories...</div>
+</ng-template>

@@ -1,0 +1,89 @@
+<div class="page-header">
+  <div>
+    <h2>Contact Messages</h2>
+    <p>Review inbox and reply to users.</p>
+  </div>
+</div>
+
+<div class="empty-state" *ngIf="!apiAvailable">
+  Contact message API is not available in the current backend.
+</div>
+
+<div *ngIf="apiAvailable">
+  <div *ngIf="!isLoading; else loading">
+    <div class="table-card" *ngIf="messages.length; else empty">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Message</th>
+            <th>Submitted</th>
+            <th>Status</th>
+            <th class="actions-head">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let message of messages">
+          <tr>
+            <td>{{ message.name }}</td>
+            <td>{{ message.email }}</td>
+            <td>{{ message.phoneNumber }}</td>
+            <td class="message">{{ message.message }}</td>
+            <td>{{ message.submittedAt | date: 'medium' }}</td>
+            <td>
+              <span class="status-chip" [class.replied]="message.repliedAt">
+                {{ message.repliedAt ? 'Replied' : 'Pending' }}
+              </span>
+            </td>
+            <td class="actions">
+              <button
+                type="button"
+                class="action-btn action-reply"
+                title="Reply"
+                aria-label="Reply"
+                (click)="startReply(message)"
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M10 8 6 12l4 4" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M6 12h8a4 4 0 0 1 4 4v1" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="activeReplyId === message.id" class="reply-row">
+            <td colspan="7">
+              <div class="reply-box">
+                <label for="replyText">Reply Message</label>
+                <textarea
+                  id="replyText"
+                  rows="4"
+                  [(ngModel)]="replyText"
+                  placeholder="Write your reply to this user"
+                ></textarea>
+                <div class="reply-actions">
+                  <button type="button" class="primary" [disabled]="isReplying" (click)="sendReply(message)">
+                    {{ isReplying ? 'Sending...' : 'Send Reply' }}
+                  </button>
+                  <button type="button" class="secondary" [disabled]="isReplying" (click)="cancelReply()">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty-state">No messages yet.</div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading">Loading messages...</div>
+</ng-template>

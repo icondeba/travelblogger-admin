@@ -1,0 +1,113 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.primary {
+  padding: 0.75rem 1.1rem;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.table-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.actions-head {
+  text-align: right;
+}
+
+.thumb {
+  width: 72px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.action-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.action-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.action-edit {
+  color: var(--primary);
+}
+
+.action-delete {
+  color: var(--danger);
+}
+
+.action-btn:hover {
+  background: #f8fafc;
+}
+
+.action-edit:hover {
+  border-color: rgba(14, 116, 144, 0.35);
+}
+
+.action-delete:hover {
+  border-color: rgba(185, 28, 28, 0.35);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.empty-state,
+.loading {
+  padding: 2rem;
+  color: var(--text-muted);
+}

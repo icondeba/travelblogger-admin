@@ -1,0 +1,28 @@
+<div class="page-header">
+  <div>
+    <h2>Dashboard</h2>
+    <p>Quick overview of your content.</p>
+  </div>
+</div>
+
+<div class="cards" *ngIf="!isLoading; else loading">
+  <div class="card">
+    <h3>Total Stories</h3>
+    <div class="value">{{ storiesCount }}</div>
+  </div>
+  <div class="card">
+    <h3>Total Events</h3>
+    <div class="value">{{ eventsCount }}</div>
+  </div>
+  <div class="card">
+    <h3>Total Contact Messages</h3>
+    <div class="value" *ngIf="contactApiAvailable; else notAvailable">{{ messagesCount ?? 0 }}</div>
+    <ng-template #notAvailable>
+      <div class="value muted">N/A</div>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading dashboard...</div>
+</ng-template>

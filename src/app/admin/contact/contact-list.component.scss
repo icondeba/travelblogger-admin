@@ -1,0 +1,138 @@
+.table-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+th {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.message {
+  max-width: 320px;
+}
+
+.actions-head {
+  text-align: right;
+}
+
+.actions {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.action-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  cursor: pointer;
+}
+
+.action-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.action-reply {
+  color: var(--primary);
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status-chip.replied {
+  color: #065f46;
+  border-color: rgba(6, 95, 70, 0.3);
+  background: rgba(6, 95, 70, 0.08);
+}
+
+.reply-row td {
+  background: #fafafa;
+}
+
+.reply-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.reply-box label {
+  font-weight: 600;
+}
+
+.reply-box textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.reply-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.primary,
+.secondary {
+  padding: 0.65rem 1.1rem;
+  border-radius: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary {
+  border: none;
+  background: var(--primary);
+  color: #fff;
+}
+
+.secondary {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+}
+
+.primary:disabled,
+.secondary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.empty-state,
+.loading {
+  padding: 2rem;
+  color: var(--text-muted);
+}
