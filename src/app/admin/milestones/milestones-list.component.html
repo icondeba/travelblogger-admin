@@ -1,0 +1,64 @@
+<div class="page-header">
+  <div>
+    <h2>Milestones</h2>
+    <p>Manage timeline milestones shown on the About page.</p>
+  </div>
+  <a class="primary" routerLink="/admin/milestones/new">Add Milestone</a>
+</div>
+
+<div *ngIf="!isLoading; else loading">
+  <div class="table-card" *ngIf="milestones.length; else empty">
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th class="actions-head">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let milestone of milestones">
+          <td>{{ milestone.year }}</td>
+          <td>{{ milestone.title }}</td>
+          <td class="desc-cell">{{ milestone.description }}</td>
+          <td class="actions">
+            <a
+              class="action-btn action-edit"
+              [routerLink]="['/admin/milestones/edit', milestone.id]"
+              title="Edit milestone"
+              aria-label="Edit milestone"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 17.25V21h3.75L19.81 7.94l-3.75-3.75L3 17.25Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M14.06 4.19 17.81 7.94" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </a>
+            <button
+              type="button"
+              class="action-btn action-delete"
+              title="Delete milestone"
+              aria-label="Delete milestone"
+              (click)="deleteMilestone(milestone)"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 7h16" stroke="currentColor" stroke-width="1.8" />
+                <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.8" />
+                <path d="M6 7l1 13h10l1-13" stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty-state">No milestones yet. Add your first milestone.</div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading">Loading milestones...</div>
+</ng-template>

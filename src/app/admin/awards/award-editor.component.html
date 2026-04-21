@@ -1,0 +1,61 @@
+<div class="page-header">
+  <div>
+    <h2>{{ isEdit ? 'Edit Award' : 'New Award' }}</h2>
+    <p>Add an award or recognition entry.</p>
+  </div>
+</div>
+
+<div *ngIf="!isLoading; else loading">
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-card">
+    <label class="field">
+      <span>Year</span>
+      <input type="text" formControlName="year" placeholder="e.g. 2024" />
+      <small *ngIf="form.controls.year.touched && form.controls.year.invalid">Year is required.</small>
+    </label>
+
+    <label class="field">
+      <span>Title</span>
+      <input type="text" formControlName="title" placeholder="Award title" />
+      <small *ngIf="form.controls.title.touched && form.controls.title.invalid">Title is required.</small>
+    </label>
+
+    <label class="field">
+      <span>Organization</span>
+      <input type="text" formControlName="organization" placeholder="Awarding organization" />
+      <small *ngIf="form.controls.organization.touched && form.controls.organization.invalid">
+        Organization is required.
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Description</span>
+      <textarea rows="4" formControlName="description" placeholder="Describe the award..."></textarea>
+      <small *ngIf="form.controls.description.touched && form.controls.description.invalid">
+        Description is required (min 10 characters).
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Cover Image</span>
+      <input type="file" accept="image/png,image/jpeg,image/webp" (change)="onFileSelected($event)" />
+      <small>Upload JPG, PNG, or WEBP (max 5MB). Optional.</small>
+    </label>
+
+    <div class="preview" *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="Award image preview" />
+    </div>
+
+    <div class="form-actions">
+      <button class="primary" type="submit" [disabled]="isSaving">
+        {{ isSaving ? 'Saving...' : isEdit ? 'Update Award' : 'Create Award' }}
+      </button>
+      <button *ngIf="isEdit" class="secondary" type="button" [disabled]="isSaving" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading award...</div>
+</ng-template>
