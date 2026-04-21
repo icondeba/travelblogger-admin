@@ -61,10 +61,13 @@ export class ContactListComponent implements OnInit {
     this.contactService.replyToMessage(message.id, trimmed).subscribe({
       next: (updated) => {
         this.messages = this.messages.map((item) => (item.id === updated.id ? updated : item));
-        this.toast.success('Reply sent and notifications delivered.');
+        this.toast.success('Reply sent.');
         this.cancelReply();
       },
-      error: (error: Error) => this.toast.error(error.message || 'Failed to send reply.'),
+      error: (error: Error) => {
+        this.toast.error(error.message || 'Failed to send reply.');
+        this.isReplying = false;
+      },
       complete: () => (this.isReplying = false)
     });
   }
