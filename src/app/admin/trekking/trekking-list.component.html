@@ -1,0 +1,73 @@
+<div class="page-header">
+  <div>
+    <h2>Trekking Information</h2>
+    <p>Manage trekking details, routes, and map links shown on the public site.</p>
+  </div>
+  <a class="primary" routerLink="/admin/trekking/new">Add Trek</a>
+</div>
+
+<div *ngIf="!isLoading; else loading">
+  <div class="table-card" *ngIf="items.length; else empty">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Cover</th>
+          <th>Location</th>
+          <th>Difficulty</th>
+          <th>Duration</th>
+          <th>Updated</th>
+          <th class="actions-head">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td>{{ item.title }}</td>
+          <td>
+            <img *ngIf="item.image" class="thumb" [src]="item.image" [alt]="item.title" />
+            <span *ngIf="!item.image">-</span>
+          </td>
+          <td>{{ item.location }}</td>
+          <td>{{ item.difficulty }}</td>
+          <td>{{ item.duration }}</td>
+          <td>{{ item.updatedAt | date: 'mediumDate' }}</td>
+          <td class="actions">
+            <a
+              class="action-btn action-edit"
+              [routerLink]="['/admin/trekking/edit', item.id]"
+              title="Edit trekking information"
+              aria-label="Edit trekking information"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 17.25V21h3.75L19.81 7.94l-3.75-3.75L3 17.25Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M14.06 4.19 17.81 7.94" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </a>
+            <button
+              type="button"
+              class="action-btn action-delete"
+              title="Delete trekking information"
+              aria-label="Delete trekking information"
+              (click)="deleteItem(item)"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 7h16" stroke="currentColor" stroke-width="1.8" />
+                <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.8" />
+                <path d="M6 7l1 13h10l1-13" stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty-state">No trekking information yet. Add your first trek.</div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading">Loading trekking information...</div>
+</ng-template>

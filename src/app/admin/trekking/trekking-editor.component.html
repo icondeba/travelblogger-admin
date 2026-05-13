@@ -1,0 +1,91 @@
+<div class="page-header">
+  <div>
+    <h2>{{ isEdit ? 'Edit Trekking Information' : 'New Trekking Information' }}</h2>
+    <p>Add trekking details, route notes, and map information.</p>
+  </div>
+</div>
+
+<div *ngIf="!isLoading; else loading">
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-card">
+    <div class="form-grid">
+      <label class="field">
+        <span>Title</span>
+        <input type="text" formControlName="title" placeholder="Sandakphu Trek" />
+        <small *ngIf="form.controls.title.touched && form.controls.title.invalid">Title is required.</small>
+      </label>
+
+      <label class="field">
+        <span>Location</span>
+        <input type="text" formControlName="location" placeholder="Darjeeling, West Bengal" />
+        <small *ngIf="form.controls.location.touched && form.controls.location.invalid">Location is required.</small>
+      </label>
+
+      <label class="field">
+        <span>Difficulty</span>
+        <input type="text" formControlName="difficulty" placeholder="Moderate" />
+        <small *ngIf="form.controls.difficulty.touched && form.controls.difficulty.invalid">
+          Difficulty is required.
+        </small>
+      </label>
+
+      <label class="field">
+        <span>Duration</span>
+        <input type="text" formControlName="duration" placeholder="5 days" />
+        <small *ngIf="form.controls.duration.touched && form.controls.duration.invalid">Duration is required.</small>
+      </label>
+    </div>
+
+    <label class="field">
+      <span>Best Season</span>
+      <input type="text" formControlName="bestSeason" placeholder="October to April" />
+      <small *ngIf="form.controls.bestSeason.touched && form.controls.bestSeason.invalid">
+        Best season is required.
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Trekking Details</span>
+      <textarea rows="7" formControlName="details" placeholder="Describe the trek, terrain, preparation, and highlights..."></textarea>
+      <small *ngIf="form.controls.details.touched && form.controls.details.invalid">
+        Trekking details are required (min 10 characters).
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Route</span>
+      <textarea rows="5" formControlName="route" placeholder="Day-wise route or route summary..."></textarea>
+      <small *ngIf="form.controls.route.touched && form.controls.route.invalid">
+        Route is required (min 10 characters).
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Map Embed URL</span>
+      <input type="url" formControlName="mapEmbedUrl" placeholder="https://www.google.com/maps/embed?pb=..." />
+      <small>Paste a Google Maps embed URL or another embeddable map URL.</small>
+    </label>
+
+    <label class="field">
+      <span>Cover Image</span>
+      <input type="file" accept="image/png,image/jpeg,image/webp" (change)="onFileSelected($event)" />
+      <small>Upload JPG, PNG, or WEBP (max 5MB). You can replace it later.</small>
+    </label>
+
+    <div class="preview" *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="Trekking cover preview" />
+    </div>
+
+    <div class="form-actions">
+      <button class="primary" type="submit" [disabled]="isSaving">
+        {{ isSaving ? 'Saving...' : isEdit ? 'Update Trek' : 'Create Trek' }}
+      </button>
+      <button class="secondary" type="button" [disabled]="isSaving" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading trekking information...</div>
+</ng-template>

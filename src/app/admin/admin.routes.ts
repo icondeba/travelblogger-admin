@@ -12,6 +12,8 @@ import { AwardsListComponent } from './awards/awards-list.component';
 import { AwardEditorComponent } from './awards/award-editor.component';
 import { MilestonesListComponent } from './milestones/milestones-list.component';
 import { MilestoneEditorComponent } from './milestones/milestone-editor.component';
+import { TrekkingListComponent } from './trekking/trekking-list.component';
+import { TrekkingEditorComponent } from './trekking/trekking-editor.component';
 import { AuthGuard } from '../guards/auth.guard';
 
 export const adminRoutes: Routes = [
@@ -29,6 +31,9 @@ export const adminRoutes: Routes = [
       { path: 'events', component: EventsListComponent },
       { path: 'events/new', component: EventEditorComponent },
       { path: 'events/edit/:id', component: EventEditorComponent },
+      { path: 'trekking', component: TrekkingListComponent },
+      { path: 'trekking/new', component: TrekkingEditorComponent },
+      { path: 'trekking/edit/:id', component: TrekkingEditorComponent },
       { path: 'awards', component: AwardsListComponent },
       { path: 'awards/new', component: AwardEditorComponent },
       { path: 'awards/edit/:id', component: AwardEditorComponent },
